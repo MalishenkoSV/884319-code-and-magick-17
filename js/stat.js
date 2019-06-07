@@ -35,7 +35,7 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.arc(CLOUD_X + 190, CLOUD_Y + 100, 40, 0, Math.PI * 2, true);
   ctx.arc(CLOUD_X + 60, CLOUD_Y + 200, 110, 0, Math.PI * 2, true);
   ctx.arc(CLOUD_X + 380, CLOUD_Y + 210, 90, 0, Math.PI * 2, true);
-  ctx.arc(CLOUD_X + 270, CLOUD_Y + 200, 100, 0, Math.PI * 2, true);
+  ctx.arc(CLOUD_X + 270, CLOUD_Y + 200, 90, 0, Math.PI * 2, true);
   ctx.arc(CLOUD_X + 190, CLOUD_Y + 200, 100, 0, Math.PI * 2, true);
   ctx.arc(CLOUD_X + 380, CLOUD_Y + 100, 30, 0, Math.PI * 2, true);
   ctx.fill();
