@@ -41,6 +41,7 @@ var renderWizardClone = function (wizardOriginal) {
   wizardCloneElement.querySelector('.wizard-eyes').style.fill = wizardOriginal.eyes;
   return wizardCloneElement;
 };
+
 var fragment = document.createDocumentFragment();
 for (var j = 0; j < wizards.lenght; j++) {
   var element = renderWizardClone(wizards[j]);
