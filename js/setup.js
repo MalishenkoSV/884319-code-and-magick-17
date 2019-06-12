@@ -43,7 +43,7 @@ var renderWizardClone = function (wizardOriginal) {
 };
 
 var fragment = document.createDocumentFragment();
-for (var j = 0; j < wizards.lenght; j++) {
+for (var j = 0; j < wizards.length; j++) {
   var element = renderWizardClone(wizards[j]);
   fragment.appendChild(element);
 }
