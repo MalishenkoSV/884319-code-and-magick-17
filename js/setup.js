@@ -15,7 +15,7 @@ var getRandomFromInterval = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 var getRandomElementFromArray = function (arr) {
-  return arr[getRandomFromInterval(0, arr.lenght - 1)];
+  return arr[getRandomFromInterval(0, arr.length - 1)];
 };
 
 var createWizard = function () {
