@@ -48,6 +48,6 @@ for (var j = 0; j < wizards.lenght; j++) {
   fragment.appendChild(element);
 }
 
-similarListElement .appendChild(fragment);
+similarListElement.appendChild(fragment);
 var setupSimilar = document.querySelector('.setup-similar');
 setupSimilar.classList.remove('hidden');
