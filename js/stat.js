@@ -58,15 +58,8 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура, Вы победили!', 200, 40);
   ctx.fillText('Список результатов:', 180, 70);
   var maxTime = getMaxTime(times);
-  for (var i = 0; i < names.length; i++) {
-    if (names[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    } else {
-      ctx.fillStyle = 'hsl(240, ' + Math.round(Math.random() * 100) + '%, 25%)';
-    }
-    ctx.fillText(names[i], CLOUD_X + FONT_GAP + (FONT_GAP + BAR_WIDTH) * i, CLOUD_Y + TEXT_FONT + HISTOGRAM_MAX_HEIGHT + 3 * GAP);
-    ctx.fillText(Math.round(times[i]), CLOUD_X + FONT_GAP + (FONT_GAP + BAR_WIDTH) * i, -(HISTOGRAM_MAX_HEIGHT) * Math.round(times[i]) / maxTime + HISTOGRAM_MAX_HEIGHT + 2 * FONT_GAP - GAP);
-    ctx.fillRect(CLOUD_X + (FONT_GAP + BAR_WIDTH) * i + FONT_GAP, CLOUD_Y + TEXT_FONT + GAP + HISTOGRAM_MAX_HEIGHT, BAR_WIDTH, -(HISTOGRAM_MAX_HEIGHT) * times[i] / maxTime);
 
-  }
-};
+  ctx.fillStyle = names[i] === Вы ? 'rgba(255, 0, 0, 1)' : 'hsl(240, ' + Math.round(Math.random() * 100) + '%, 25%)';
+  ctx.fillText(names[i], CLOUD_X + FONT_GAP + (FONT_GAP + BAR_WIDTH) * i, CLOUD_Y + TEXT_FONT + HISTOGRAM_MAX_HEIGHT + 3 * GAP);
+  ctx.fillText(Math.round(times[i]), CLOUD_X + FONT_GAP + (FONT_GAP + BAR_WIDTH) * i, -(HISTOGRAM_MAX_HEIGHT) * Math.round(times[i]) / maxTime + HISTOGRAM_MAX_HEIGHT + 2 * FONT_GAP - GAP);
+  ctx.fillRect(CLOUD_X + (FONT_GAP + BAR_WIDTH) * i + FONT_GAP, CLOUD_Y + TEXT_FONT + GAP + HISTOGRAM_MAX_HEIGHT, BAR_WIDTH, -(HISTOGRAM_MAX_HEIGHT) * times[i] / maxTime);
