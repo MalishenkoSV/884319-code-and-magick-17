@@ -1,92 +1,7 @@
 // Файл setup.js
 'use strict';
-var NUMBERS_WIZARD = 4;
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
-var Wizard = {
-  NAMES: ['Иван', 'Хуан', 'Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'],
-  SURNAMES: ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг']
-
-};
-var Color = {
-  COAT: ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'],
-  EYES: ['black', 'red', 'blue', 'yellow', 'green'],
-  FIREBALL: ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848']
-};
-
-var similarListElement = document.querySelector('.setup-similar-list');
-document.querySelector('.setup-similar').classList.remove('hidden');
-
-/**
- * Создает рандомное число
- * @param {number} min — минимальное число
- * @param {number} max -максимальное число
- * @return {number} -- рандомное число
- */
-var getRandomFromInterval = function (min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-/**
- * Выбираем рандомный элемент из массива
- * @param {array} arr -- массив
- * @return {numver}  -- рандомый элемент из массива
- */
-var getRandomElementFromArray = function (arr) {
-  return arr[getRandomFromInterval(0, arr.length - 1)];
-};
-
-/**
- * Создает обьект
- * @return {object} -- объект данных о объявлении
- */
-var createWizard = function () {
-  var wizardObject = {
-    name: getRandomElementFromArray(Wizard.NAMES) + ' ' + getRandomElementFromArray(Wizard.SURNAMES),
-    coatColor: getRandomElementFromArray(Color.COAT),
-    eyes: getRandomElementFromArray(Color.EYES)
-  };
-  return wizardObject;
-};
-
-/**
- * Создает массив обьектов Волшебников
- */
-var wizards = [];
-for (var i = 0; i < NUMBERS_WIZARD; i++) {
-  var wizard = createWizard();
-  wizards.push(wizard);
-}
-
-/**
- * Создает и отрисовывает  Волшебников
- * @param {object} wizardOriginal - данные обьекта для отрисовки Волшебника
- * @return {object} -- элемент с данными о Волшебнике,  которые позже отрисуется из массива
- */
-var similarTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-var renderWizardClone = function (wizardOriginal) {
-  var wizardCloneElement = similarTemplate.cloneNode(true);
-  wizardCloneElement.querySelector('.setup-similar-label').textContent = wizardOriginal.name;
-  wizardCloneElement.querySelector('.wizard-coat').style.fill = wizardOriginal.coatColor;
-  wizardCloneElement.querySelector('.wizard-eyes').style.fill = wizardOriginal.eyes;
-  return wizardCloneElement;
-};
-
-/**
- * Вставка обьявлений во фрагмент
- */
-var fragment = document.createDocumentFragment();
-for (var j = 0; j < NUMBERS_WIZARD; j++) {
-  var element = renderWizardClone(wizards[j]);
-  fragment.appendChild(element);
-}
-
-/**
- * Вставка  фрагмента а ДОМ
- */
-similarListElement.appendChild(fragment);
-var setupSimilar = document.querySelector('.setup-similar');
-setupSimilar.classList.remove('hidden');
 
 /**
  * Закрытие и открытие окна
@@ -193,7 +108,7 @@ setupSubmite.addEventListener('focus', function (evt) {
 */
 var coat = document.querySelector('.setup-wizard .wizard-coat');
 coat.addEventListener('click', function () {
-  var color = getRandomElementFromArray(Color.COAT);
+  var color = window.random.getRandomElementFromArray(window.wizard.color.COAT);
   coat.style.fill = color;
 });
 /**
@@ -201,7 +116,7 @@ coat.addEventListener('click', function () {
 */
 var eyesWizard = document.querySelector('.setup-wizard .wizard-eyes');
 eyesWizard.addEventListener('click', function () {
-  var eyes = getRandomElementFromArray(Color.EYES);
+  var eyes = window.random.getRandomElementFromArray(window.wizard.color.EYES);
   eyesWizard.style.fill = eyes;
 });
 /**
@@ -209,53 +124,6 @@ eyesWizard.addEventListener('click', function () {
 */
 var fireballWizard = document.querySelector('.setup-fireball-wrap');
 fireballWizard.addEventListener('click', function () {
-  var fireball = getRandomElementFromArray(Color.FIREBALL);
+  var fireball = window.random.getRandomElementFromArray(window.wizard.color.FIREBALL);
   fireballWizard.style.background = fireball;
 });
-
-// Файл dialog.js
-(function () {
-  var setupDialogElement = setup.querySelector('.upload');
-  var onDialogUpload = setupDialogElement.querySelector('.setup-user-pic');
-  setupDialogElement.addEventListener('mousedown', function (evt) {
-    evt.preventDefault();
-    var startCoords = {
-      x: evt.clientX,
-      y: evt.clientY
-    };
-    var dragged = false;
-    var onMouseMove = function (moveEvt) {
-      moveEvt.preventDefault();
-      dragged = true;
-
-      var shift = {
-        x: startCoords.x - moveEvt.clientX,
-        y: startCoords.y - moveEvt.clientY
-      };
-
-      startCoords = {
-        x: moveEvt.clientX,
-        y: moveEvt.clientY
-      };
-
-      setup.style.top = (setup.offsetTop - shift.y) + 'px';
-      setup.style.left = (setup.offsetLeft - shift.x) + 'px';
-    };
-    var onMouseUp = function (upEvt) {
-      upEvt.preventDefault();
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
-      if (dragged) {
-        var onClickPreventDefault = function () {
-          evt.preventDefault();
-          onDialogUpload.removeEventListener('click', onClickPreventDefault);
-        };
-        onDialogUpload.addEventListener('click', onClickPreventDefault);
-      }
-
-    };
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-  });
-
-})();
