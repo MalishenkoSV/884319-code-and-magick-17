@@ -35,6 +35,7 @@
         var onClickPreventDefault = function (evtDraged) {
           evtDraged.preventDefault();
           setupDialogElement.removeEventListener('click', onClickPreventDefault);
+
         };
         setupDialogElement.addEventListener('click', onClickPreventDefault);
       }
