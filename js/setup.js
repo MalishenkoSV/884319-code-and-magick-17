@@ -2,8 +2,6 @@
 'use strict';
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
-var setupDefaultCoordsY;
-var setupDefaultCoordsX;
 /**
  * Закрытие и открытие окна
  */
@@ -28,13 +26,11 @@ var onPopupEscPress = function (evt) {
 @param{Event} evt - обьект
 */
 var setDefaultCoords = function () {
-  setup.style.top = setupDefaultCoordsY + 'px';
-  setup.style.left = setupDefaultCoordsY + 'px';
+  setup.style.top = '';
+  setup.style.left = '';
 };
 
 var openPopup = function () {
-  setupDefaultCoordsY = setup.offsetTop;
-  setupDefaultCoordsX = setup.offsetLeft;
   setup.classList.remove('hidden');
 };
 /**
