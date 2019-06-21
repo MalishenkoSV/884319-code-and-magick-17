@@ -77,4 +77,29 @@
       FIREBALL: ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848']
     }
   };
+  /**
+   * ф-ция - обработчик клика и смена рандомно цвета куртки волшебника
+   */
+  var coat = document.querySelector('.setup-wizard .wizard-coat');
+  coat.addEventListener('click', function () {
+    var color = window.random.getRandomElementFromArray(window.wizard.color.COAT);
+    coat.style.fill = color;
+  });
+  /**
+   * ф-ция - обработчик клика и смена рандомно цвета глаз волшебника
+   */
+  var eyesWizard = document.querySelector('.setup-wizard .wizard-eyes');
+  eyesWizard.addEventListener('click', function () {
+    var eyes = window.random.getRandomElementFromArray(window.wizard.color.EYES);
+    eyesWizard.style.fill = eyes;
+  });
+  /**
+   * ф-ция - обработчик клика и смена рандомно цвета фаербола волшебника
+   */
+  var fireballWizard = document.querySelector('.setup-fireball-wrap');
+  fireballWizard.addEventListener('click', function () {
+    var fireball = window.random.getRandomElementFromArray(window.wizard.color.FIREBALL);
+    fireballWizard.style.background = fireball;
+  });
+
 })();
