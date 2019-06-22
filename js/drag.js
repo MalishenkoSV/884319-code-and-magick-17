@@ -1,9 +1,7 @@
 // Файл drag.js
 'use strict';
 (function () {
-  var setup = document.querySelector('.setup');
-  var setupDialogElement = setup.querySelector('.upload');
-  setupDialogElement.addEventListener('mousedown', function (evt) {
+  window.variables.setupDialogElement.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
     var startCoords = {
       x: evt.clientX,
@@ -24,8 +22,8 @@
         y: moveEvt.clientY
       };
 
-      setup.style.top = (setup.offsetTop - shift.y) + 'px';
-      setup.style.left = (setup.offsetLeft - shift.x) + 'px';
+      window.variables.setup.style.top = (window.variables.setup.offsetTop - shift.y) + 'px';
+      window.variables.setup.style.left = (window.variables.setup.offsetLeft - shift.x) + 'px';
     };
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
@@ -34,10 +32,10 @@
       if (dragged) {
         var onClickPreventDefault = function (evtDraged) {
           evtDraged.preventDefault();
-          setupDialogElement.removeEventListener('click', onClickPreventDefault);
+          window.variables.setupDialogElement.removeEventListener('click', onClickPreventDefault);
 
         };
-        setupDialogElement.addEventListener('click', onClickPreventDefault);
+        window.variables.setupDialogElement.addEventListener('click', onClickPreventDefault);
       }
 
     };

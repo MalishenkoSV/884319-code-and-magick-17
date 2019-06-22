@@ -1,11 +1,6 @@
 // Файл star.js
 'use strict';
 (function () {
-  var BACKPACK_TOP = 160;
-  var BACKPACK_LEFT = 200;
-  var START = 0;
-  var setup = document.querySelector('.setup');
-  var onArtifactDown = setup.querySelector('.setup-artifacts-cell > img');
   var onMousedownArtifact = function (evt) {
     evt.preventDefault();
 
@@ -17,7 +12,7 @@
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
 
-      onArtifactDown.style.position = 'absolute';
+      window.variables.onArtifactDown.style.position = 'absolute';
 
       var shift = {
         x: startCoords.x - moveEvt.clientX,
@@ -29,8 +24,8 @@
         y: moveEvt.clientY
       };
 
-      onArtifactDown.style.top = (onArtifactDown.offsetTop - shift.y) + 'px';
-      onArtifactDown.style.left = (onArtifactDown.offsetLeft - shift.x) + 'px';
+      window.variables.onArtifactDown.style.top = (window.variables.onArtifactDown.offsetTop - shift.y) + 'px';
+      window.variables.onArtifactDown.style.left = (window.variables.onArtifactDown.offsetLeft - shift.x) + 'px';
 
     };
 
@@ -41,21 +36,21 @@
       document.removeEventListener('mouseup', onMouseUp);
 
       if (upEvt.target.className === 'setup-artifacts-cell') {
-        document.querySelector('.setup-artifacts-cell').removeChild(onArtifactDown);
-        document.querySelector('.setup-artifacts > .setup-artifacts-cell').appendChild(onArtifactDown);
-        onArtifactDown.style.position = 'inherit';
-        onArtifactDown.style.top = START + 'px';
-        onArtifactDown.style.left = START + 'px';
+        document.querySelector('.setup-artifacts-cell').removeChild(window.variables.onArtifactDown);
+        document.querySelector('.setup-artifacts > .setup-artifacts-cell').appendChild(window.variables.onArtifactDown);
+        window.variables.onArtifactDown.style.position = 'inherit';
+        window.variables.onArtifactDown.style.top = window.variables.START + 'px';
+        window.variables.onArtifactDown.style.left = window.variables.START + 'px';
       } else {
-        onArtifactDown.style.position = 'inherit';
-        document.querySelector('.setup-artifacts-shop > .setup-artifacts-cell').appendChild(onArtifactDown);
-        onArtifactDown.style.top = BACKPACK_TOP + 'px';
-        onArtifactDown.style.left = BACKPACK_LEFT + 'px';
+        window.variables.onArtifactDown.style.position = 'inherit';
+        document.querySelector('.setup-artifacts-shop > .setup-artifacts-cell').appendChild(window.variables.onArtifactDown);
+        window.variables.onArtifactDown.style.top = window.variables.BACKPACK_TOP + 'px';
+        window.variables.onArtifactDown.style.left = window.variables.BACKPACK_LEFT + 'px';
       }
     };
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   };
-  onArtifactDown.addEventListener('mousedown', onMousedownArtifact);
+  window.variables.onArtifactDown.addEventListener('mousedown', onMousedownArtifact);
 })();

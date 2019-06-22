@@ -1,4 +1,4 @@
-// Файл random.js
+// Файл util.js
 'use strict';
 (function () {
 /**
@@ -7,7 +7,7 @@
  * @param {number} max -максимальное число
  * @return {number} -- рандомное число
  */
-  window.random = {
+  window.util = {
     getRandomFromInterval: function (min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     },
