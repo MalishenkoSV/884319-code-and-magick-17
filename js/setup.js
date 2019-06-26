@@ -96,21 +96,5 @@
     if (evt.keyCode === window.variables.ENTER_KEYCODE) {
       window.variables.form.submit();
     }
-
-    var coat = document.querySelector('.setup-wizard .wizard-coat');
-    coat.addEventListener('click', function () {
-      var color = window.util.getRandomElementFromArray(window.variables.COAT_COLORS);
-      coat.style.fill = color;
-    });
-    var eyesWizard = document.querySelector('.setup-wizard .wizard-eyes');
-    eyesWizard.addEventListener('click', function () {
-      var eyes = window.util.getRandomElementFromArray(window.variables.EYES_COLORS);
-      eyesWizard.style.fill = eyes;
-    });
-    var fireballWizard = document.querySelector('.setup-fireball-wrap');
-    fireballWizard.addEventListener('click', function () {
-      var fireball = window.util.getRandomElementFromArray(window.variables.FIREBALL_COLORS);
-      fireballWizard.style.background = fireball;
-    });
   });
 })();
