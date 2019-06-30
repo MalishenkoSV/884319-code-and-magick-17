@@ -1,9 +1,10 @@
 // Файл form.js
 'use strict';
 (function () {
-  window.variables.form.addEventListener('submit', function (evt) {
-    window.backend.load(new FormData(window.variables.form), function () {
-      window.variables.setupSimilar.classList.remove('hidden');
+  var form = window.variables.setup.querySelector('.setup-wizard-form');
+  form.addEventListener('submit', function (evt) {
+    window.save(new FormData(form), function () {
+      form.classList.add('hidden');
     });
     evt.preventDefault();
   });
