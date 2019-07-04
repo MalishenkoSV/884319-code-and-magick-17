@@ -30,9 +30,9 @@
 
   var renderWizardClone = function (wizardOriginal) {
     var wizardCloneElement = window.variables.similarTemplate.cloneNode(true);
-    wizardCloneElement.querySelector('.setup-similar-label').textContent = wizardOriginal.name;
-    wizardCloneElement.querySelector('.wizard-coat').style.fill = wizardOriginal.coatColor;
-    wizardCloneElement.querySelector('.wizard-eyes').style.fill = wizardOriginal.eyes;
+    wizardCloneElement.querySelector('.setup-similar-label').innerText = wizardOriginal.name;
+    wizardCloneElement.querySelector('.wizard-coat').style.fill = wizardOriginal.colorCoat;
+    wizardCloneElement.querySelector('.wizard-eyes').style.fill = wizardOriginal.colorEyes;
     return wizardCloneElement;
   };
 
@@ -48,21 +48,23 @@
     }
     window.variables.similarListElement.appendChild(fragment);
   };
-  window.backend.load(showWizard);
-  // window.backend.load(onSuccess);
-  /**
-   * Вставка  фрагмента а ДОМ
-   */
+  window.wizard = {
+    showWizard: showWizard
+  };
   var setupSimilar = document.querySelector('.setup-similar');
   setupSimilar.classList.remove('hidden');
   document.querySelector('.setup-wizard-appearance').addEventListener('click', function (evt) {
     if (evt.target.classList.contains('wizard-coat')) {
-      var color = window.util.getRandomElementFromArray(window.variables.COLOR_COAT);
-      window.variables.coat.style.fill = color;
+      var newColor = window.util.getRandomElementFromArray(window.variables.COLOR_COAT);
+      window.variables.coat.style.fill = newColor;
+      window.variables.colorCoat = newColor;
+      window.similar.upgradeWizards();
     }
     if (evt.target.classList.contains('wizard-eyes')) {
-      var eyes = window.util.getRandomElementFromArray(window.variables.COLOR_EYES);
-      window.variables.eyesWizard.style.fill = eyes;
+      var newEyes = window.util.getRandomElementFromArray(window.variables.COLOR_EYES);
+      window.variables.eyesWizard.style.fill = newEyes;
+      window.variables.colorEyes = newEyes;
+      window.similar.upgradeWizards();
     }
     if (evt.target.classList.contains('setup-fireball-wrap')) {
       var fireball = window.util.getRandomElementFromArray(window.variables.COLOR_FIREBALL);

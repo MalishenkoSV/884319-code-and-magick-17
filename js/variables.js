@@ -27,6 +27,8 @@
   var similarListElement = document.querySelector('.setup-similar-list');
   var similarTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
   var fireballInput = document.querySelector('.fireball-color');
+  var colorEyes;
+  var colorCoat;
   window.variables = {
     ESC_KEYCODE: ESC_KEYCODE,
     ENTER_KEYCODE: ENTER_KEYCODE,
@@ -47,6 +49,8 @@
     BACKPACK_LEFT: BACKPACK_LEFT,
     onArtifactDown: onArtifactDown,
     similarListElement: similarListElement,
+    colorEye: colorEyes,
+    colorCoat: colorCoat,
     WIZARD_NAMES: WIZARD_NAMES,
     WIZARD_SURNAMES: WIZARD_SURNAMES,
     COLOR_COAT: COLOR_COAT,
