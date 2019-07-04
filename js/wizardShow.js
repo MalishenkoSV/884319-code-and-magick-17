@@ -1,33 +1,15 @@
 // Файл wizard.js
 'use strict';
 (function () {
-//   /**
-//  * Создает обьект
-//  * @return {object} -- объект данных о объявлении
-//  */
-//   var createWizard = function () {
-//     var wizardObject = {
-//       name: window.util.getRandomElementFromArray(window.variables.WIZARD_NAMES) + ' ' + window.util.getRandomElementFromArray(window.variables.WIZARD_SURNAMES),
-//       coatColor: window.util.getRandomElementFromArray(window.variables.COLOR_COAT),
-//       eyes: window.util.getRandomElementFromArray(window.variables.COLOR_EYES)
-//     };
-//     return wizardObject;
-//   };
-
-  //   /**
-  //    * Создает массив обьектов Волшебников
-  //    */
-  //   var arrayWizards = [];
-  //   for (var i = 0; i < window.variables.NUMBERS_WIZARD; i++) {
-  //     var arrayWizard = createWizard();
-  //     arrayWizards.push(arrayWizard);
-  //   }
+  var wizard = {
+    onEyesChange: function () {},
+    onCoatChange: function () {}
+  };
   /**
    * Создает и отрисовывает  Волшебников
    * @param {object} wizardOriginal - данные обьекта для отрисовки Волшебника
    * @return {object} -- элемент с данными о Волшебнике,  которые позже отрисуется из массива
    */
-
   var renderWizardClone = function (wizardOriginal) {
     var wizardCloneElement = window.variables.similarTemplate.cloneNode(true);
     wizardCloneElement.querySelector('.setup-similar-label').innerText = wizardOriginal.name;
@@ -48,9 +30,9 @@
     }
     window.variables.similarListElement.appendChild(fragment);
   };
-  window.wizard = {
-    showWizard: showWizard
-  };
+  /**
+   * Изменение цвета по клику
+   */
   var setupSimilar = document.querySelector('.setup-similar');
   setupSimilar.classList.remove('hidden');
   document.querySelector('.setup-wizard-appearance').addEventListener('click', function (evt) {
@@ -59,18 +41,25 @@
       window.variables.coat.style.fill = newColor;
       window.variables.colorCoat = newColor;
       window.similar.upgradeWizards();
+      wizard.onCoatChange(newColor);
     }
     if (evt.target.classList.contains('wizard-eyes')) {
       var newEyes = window.util.getRandomElementFromArray(window.variables.COLOR_EYES);
       window.variables.eyesWizard.style.fill = newEyes;
       window.variables.colorEyes = newEyes;
+      wizard.onEyesChange(newColor);
       window.similar.upgradeWizards();
     }
-    if (evt.target.classList.contains('setup-fireball-wrap')) {
+    if (evt.target.classList.contains('setup-fireball')) {
       var fireball = window.util.getRandomElementFromArray(window.variables.COLOR_FIREBALL);
       window.variables.fireballWizard.style.background = fireball;
       window.variables.fireballWizard.value = fireball;
       evt.target.style.fill = fireball;
     }
   });
+
+  window.wizardShow = {
+    showWizard: showWizard,
+    wizard: wizard
+  };
 })();
