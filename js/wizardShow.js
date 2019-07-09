@@ -28,6 +28,9 @@
       var element = renderWizardClone(wizards[j]);
       fragment.appendChild(element);
     }
+    if (wizards) {
+      element.remove();
+    }
     window.variables.similarListElement.appendChild(fragment);
   };
   /**
@@ -38,17 +41,22 @@
   document.querySelector('.setup-wizard-appearance').addEventListener('click', function (evt) {
     if (evt.target.classList.contains('wizard-coat')) {
       var newColor = window.util.getRandomElementFromArray(window.variables.COLOR_COAT);
-      window.variables.coat.style.fill = newColor;
-      window.variables.colorCoat = newColor;
+      wizard.onCoatChange = window.debounce(function () {
+        window.variables.coat.style.fill = newColor;
+        window.variables.colorCoat = newColor;
+        window.similar.upgradeWizards();
+      });
       window.similar.upgradeWizards();
       wizard.onCoatChange(newColor);
     }
     if (evt.target.classList.contains('wizard-eyes')) {
       var newEyes = window.util.getRandomElementFromArray(window.variables.COLOR_EYES);
-      window.variables.eyesWizard.style.fill = newEyes;
-      window.variables.colorEyes = newEyes;
-      wizard.onEyesChange(newColor);
-      window.similar.upgradeWizards();
+      wizard.onEyesChange = window.debounce(function () {
+        window.variables.eyesWizard.style.fill = newEyes;
+        window.variables.colorEyes = newEyes;
+        wizard.onEyesChange(newEyes);
+        window.similar.upgradeWizards();
+      });
     }
     if (evt.target.classList.contains('setup-fireball')) {
       var fireball = window.util.getRandomElementFromArray(window.variables.COLOR_FIREBALL);
